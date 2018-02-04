@@ -1,0 +1,76 @@
+@font-family: verdana;
+
+html {
+    font-family: @font-family;
+}
+
+#paper {
+  width: 1000px;
+  height: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 30px;
+  position: relative;
+
+  -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+  box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+
+  header {
+    font-size: 26px;
+    width: 700px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 10px;
+  }
+
+  #content {
+    margin-left: 30px;
+    margin-right: 30px;
+    margin-top: 25px;
+    border-collapse: collapse;
+  }
+
+  #info {
+    font-size: 18px;
+    width: 900px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+  }
+
+  .elem-header {
+    font-weight: bold;
+    text-align: right;
+    border-right: 1px solid black;
+    padding-right: 10px;
+  }
+
+  .elem-text {
+    padding-left: 10px;
+  }
+
+  .content-row {
+    td {
+        padding-bottom: 25px;
+    }
+  }
+
+  .element {
+    display: flex;
+    margin-top: 25px;
+    margin-left: 30px;
+    margin-right: 30px;
+  }
+
+  footer {
+    text-align: right;
+    margin-right: 30px;
+    font-size: 20px;
+    position: absolute;
+    bottom: 10px;
+    right: 0px;
+  }
+}
