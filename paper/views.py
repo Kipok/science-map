@@ -4,7 +4,10 @@ from .models import Paper, Method
 
 def paper_view(request, paper_id):
     paper = get_object_or_404(Paper, pk=paper_id)
-    context = {'paper': paper}
+    context = {
+        'paper': paper,
+        'methods': Method.objects.filter(orig_paper_id=paper_id),
+    }
     return render(request, "paper/paper.html", context)
 
 

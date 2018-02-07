@@ -5,16 +5,11 @@ from django.db import models
 #     value = models.FloatField()
 
 
-class Method(models.Model):
-    title = models.CharField(max_length=100)
-    short_title = models.CharField(max_length=20)
-    description = models.TextField(max_length=3200)
-    orig_paper = models.ForeignKey(
-        'Paper', on_delete=models.CASCADE, verbose_name='Original paper',
-    )
+class Author(models.Model):
+    name = models.CharField(max_length=100)
 
     def __str__(self):
-        return self.short_title
+        return self.name
 
 
 class Paper(models.Model):
@@ -32,7 +27,20 @@ class Paper(models.Model):
     )
 
     type = models.IntegerField(choices=TYPE_CHOICES)
-    methods = models.ManyToManyField(Method, blank=True)
+    authors = models.ManyToManyField(Author)
 
     def __str__(self):
         return self.title
+
+
+class Method(models.Model):
+    title = models.CharField(max_length=100)
+    short_title = models.CharField(max_length=20)
+    description = models.TextField(max_length=3200)
+    orig_paper = models.ForeignKey(
+        Paper, on_delete=models.CASCADE, verbose_name='Original paper',
+    )
+
+    def __str__(self):
+        return self.short_title
+
