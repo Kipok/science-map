@@ -11,4 +11,4 @@ def paper_view(request, paper_id):
 def method_view(request, method_id):
     method = get_object_or_404(Method, pk=method_id)
     context = {'method': method}
-    return render(request, "method/method.html", context)
+    return render(request, "paper/method.html", context)

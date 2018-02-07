@@ -25,7 +25,7 @@
             <td class="elem-header">Methods</td>
             <td class="elem-text">
                 {% for method in paper.methods.all %}
-                    <a href="#1">{{ method.short_title }}</a>,
+                    <a href="{% url "paper:method" method.id %}">{{ method.short_title }}</a>,
                 {% endfor %}
 {#                    <a href="#1">MF-e</a>,#}
 {#                    <a href="#2">MF-i</a>,#}

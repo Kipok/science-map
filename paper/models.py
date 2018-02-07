@@ -8,7 +8,7 @@ from django.db import models
 class Method(models.Model):
     title = models.CharField(max_length=100)
     short_title = models.CharField(max_length=20)
-    description = models.CharField(max_length=3200)
+    description = models.TextField(max_length=3200)
     orig_paper = models.ForeignKey(
         'Paper', on_delete=models.CASCADE, verbose_name='Original paper',
     )
