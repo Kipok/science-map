@@ -7,5 +7,5 @@ from home.views import home_page
 urlpatterns = [
     path('admin/', admin.site.urls),
     url('^$', home_page, name='home'),
-    url(r'^papers/', include('paper.urls')),
+    url(r'^paper/', include('paper.urls')),
 ]

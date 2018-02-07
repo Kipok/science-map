@@ -1,61 +1,57 @@
+{% extends "base_element.html" %}
 {% load static %}
 
-<!DOCTYPE html>
-<head>
-    <link rel="stylesheet" type="text/css" href="{% static 'styles/normalize.css' %}" />
+{% block css-include %}
     <link rel="stylesheet" type="text/css" href="{% static 'styles/paper.css' %}"/>
-    <title>Science map</title>
-</head>
-<body>
-    <div id="paper">
-        <header>{{ paper.title }}</header>
-        <div id="info">Bhuwan Dhingra, Kathryn Mazaitis, William Cohen (arxiv, 9 August 2017), 10 cites, 3 links</div>
-        <table id="content">
-            <tr class="content-row">
-                <td class="elem-header">Problem</td>
-                <td class="elem-text">{{ paper.problem }}</td>
-            </tr>
-            <tr class="content-row">
-                <td class="elem-header">Type</td>
-                <td class="elem-text">{{ paper.get_type_display }}.</td>
-            </tr>
-            <tr class="content-row">
-                <td class="elem-header">Solution</td>
-                <td class="elem-text">{{ paper.solution }}</td><!-- TODO: justify with carry-over text? -->
-            </tr>
-            <tr class="content-row">
-                <td class="elem-header">Methods</td>
-                <td class="elem-text">
-                    {% for method in paper.methods.all %}
-                        <a href="#1">{{ method.short_title }}</a>,
-                    {% endfor %}
+{% endblock %}
+
+{% block content %}
+    <header>{{ paper.title }}</header>
+    <div id="info">Bhuwan Dhingra, Kathryn Mazaitis, William Cohen (arxiv, 9 August 2017), 10 cites, 3 links</div>
+    <table id="content">
+        <tr class="content-row">
+            <td class="elem-header">Problem</td>
+            <td class="elem-text">{{ paper.problem }}</td>
+        </tr>
+        <tr class="content-row">
+            <td class="elem-header">Type</td>
+            <td class="elem-text">{{ paper.get_type_display }}.</td>
+        </tr>
+        <tr class="content-row">
+            <td class="elem-header">Solution</td>
+            <td class="elem-text">{{ paper.solution }}</td><!-- TODO: justify with carry-over text? -->
+        </tr>
+        <tr class="content-row">
+            <td class="elem-header">Methods</td>
+            <td class="elem-text">
+                {% for method in paper.methods.all %}
+                    <a href="#1">{{ method.short_title }}</a>,
+                {% endfor %}
 {#                    <a href="#1">MF-e</a>,#}
 {#                    <a href="#2">MF-i</a>,#}
-                    <a href="#3">Richardson et al., 2013/SW</a>,
-                    <a href="#4">Richardson et al., 2013/SW+D</a>
-                </td>
-            </tr>
-            <tr class="content-row">
-                <td class="elem-header">Results</td>
-                <td class="elem-text">
-                    <a href="#0">QUASAR-T</a> (<a href="#0">precision</a>, <a href="#0">recall</a>).
-                    <a href="#1">MF-e</a> (0.20, 0.43),
-                    <a href="#2">MF-i</a> (0.50, 0.32),
-                    <a href="#3">Richardson et al., 2013/SW</a> (0.93, 0.99),
-                    <a href="#4">Richardson et al., 2013/SW+D</a> (0.61, 0.41)
-                    <br/><br/> <!-- TODO: make it with margin/padding -->
-                    <a href="#0">QUASAR-S</a> (<a href="#0">precision</a>, <a href="#0">recall</a>).
-                    <a href="#1">MF-e</a> (0.20, 0.43),
-                    <a href="#2">MF-i</a> (0.50, 0.32),
-                    <a href="#3">Richardson et al., 2013/SW</a> (0.92, 0.99),
-                    <a href="#4">Richardson et al., 2013/SW+D</a> (0.69, 0.41)
-                </td>
-            </tr>
-        </table>
-        <footer>
-            <a href="https://arxiv.org/abs/1707.03904">url</a>,
-            <a href="https://github.com/bdhingra/quasar">code</a>
-        </footer>
-    </div>
-</body>
-</html>
+                <a href="#3">Richardson et al., 2013/SW</a>,
+                <a href="#4">Richardson et al., 2013/SW+D</a>
+            </td>
+        </tr>
+        <tr class="content-row">
+            <td class="elem-header">Results</td>
+            <td class="elem-text">
+                <a href="#0">QUASAR-T</a> (<a href="#0">precision</a>, <a href="#0">recall</a>).
+                <a href="#1">MF-e</a> (0.20, 0.43),
+                <a href="#2">MF-i</a> (0.50, 0.32),
+                <a href="#3">Richardson et al., 2013/SW</a> (0.93, 0.99),
+                <a href="#4">Richardson et al., 2013/SW+D</a> (0.61, 0.41)
+                <br/><br/> <!-- TODO: make it with margin/padding -->
+                <a href="#0">QUASAR-S</a> (<a href="#0">precision</a>, <a href="#0">recall</a>).
+                <a href="#1">MF-e</a> (0.20, 0.43),
+                <a href="#2">MF-i</a> (0.50, 0.32),
+                <a href="#3">Richardson et al., 2013/SW</a> (0.92, 0.99),
+                <a href="#4">Richardson et al., 2013/SW+D</a> (0.69, 0.41)
+            </td>
+        </tr>
+    </table>
+    <footer>
+        <a href="https://arxiv.org/abs/1707.03904">url</a>,
+        <a href="https://github.com/bdhingra/quasar">code</a>
+    </footer>
+{% endblock content %}

@@ -1,0 +1,15 @@
+{% load static %}
+
+<!DOCTYPE html>
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/normalize.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/base_element.css' %}"/>
+    {% block css-include %} {% endblock %}
+    <title>Science map</title>
+</head>
+<body>
+    <div id="element">
+    {% block content %}{% endblock %}
+    </div>
+</body>
+</html>
