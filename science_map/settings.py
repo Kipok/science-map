@@ -122,4 +122,4 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     'static',
-] # TODO: move css to apps folders somehow
+]
