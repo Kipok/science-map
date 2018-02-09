@@ -10,3 +10,5 @@ urlpatterns = [
     url('^$', home_page, name='home'),
     url(r'^paper/', include('paper.urls')),
 ] + staticfiles_urlpatterns()
+
+# TODO: change license?

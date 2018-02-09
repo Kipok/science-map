@@ -12,10 +12,23 @@ class Author(models.Model):
         return self.name
 
 
+class Conference(models.Model):
+    title = models.CharField(max_length=300)
+    short_title = models.CharField(max_length=30)
+
+    def __str__(self):
+        return self.short_title
+
+
 class Paper(models.Model):
     title = models.CharField(max_length=200)
     problem = models.TextField(max_length=500)
     solution = models.TextField(max_length=2000)
+    conference = models.ForeignKey(Conference, on_delete=models.CASCADE)
+    text_url = models.URLField()
+    code_url = models.URLField(blank=True)
+    project_url = models.URLField(blank=True)
+    date_published = models.DateField(verbose_name="publication date")
 
     DATASET_TYPE = 0
     METHOD_TYPE = 1

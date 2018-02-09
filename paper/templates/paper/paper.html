@@ -10,7 +10,9 @@
     <div id="info">
         {% for author in paper.authors.all %}
             {{ author.name }}{%if not forloop.last%},{%endif%}
-        {% endfor %} (arxiv, 9 August 2017), 10 cites, 3 links</div>
+        {% endfor %} ({{ paper.conference.short_title }},
+                      {{ paper.date_published }}), 10 cites, 3 links</div>
+    {# TODO: automatic cites and links determination #}
     <table id="content">
         <tr class="content-row">
             <td class="elem-header">Problem</td>
@@ -28,10 +30,8 @@
             <td class="elem-header">Methods</td>
             <td class="elem-text">
                 {% for method in methods %}
-                    <a href="{% url "paper:method" method.id %}">{{ method.short_title }}</a>,
+                    <a href="{% url "paper:method" method.id %}">{{ method.short_title }}</a>{%if not forloop.last%},{%endif%}
                 {% endfor %}
-                <a href="#3">Richardson et al., 2013/SW</a>,
-                <a href="#4">Richardson et al., 2013/SW+D</a>
             </td>
         </tr>
         <tr class="content-row">
@@ -52,7 +52,8 @@
         </tr>
     </table>
     <footer>
-        <a href="https://arxiv.org/abs/1707.03904">url</a>,
-        <a href="https://github.com/bdhingra/quasar">code</a>
+        <a href="{{ paper.text_url }}">url</a>,
+        <a href="{{ paper.code_url }}">code</a>
+{# TODO: project url, make code url optional #}
     </footer>
 {% endblock content %}
