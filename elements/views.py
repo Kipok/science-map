@@ -8,10 +8,10 @@ def paper_view(request, paper_id):
         'paper': paper,
         'methods': Method.objects.filter(orig_paper_id=paper_id),
     }
-    return render(request, "paper/paper.html", context)
+    return render(request, "elements/paper.html", context)
 
 
 def method_view(request, method_id):
     method = get_object_or_404(Method, pk=method_id)
     context = {'method': method}
-    return render(request, "paper/method.html", context)
+    return render(request, "elements/method.html", context)

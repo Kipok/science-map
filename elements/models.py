@@ -51,7 +51,7 @@ class Method(models.Model):
     short_title = models.CharField(max_length=20)
     description = models.TextField(max_length=3200)
     orig_paper = models.ForeignKey(
-        Paper, on_delete=models.CASCADE, verbose_name='Original paper',
+        Paper, on_delete=models.CASCADE, verbose_name='Original elements',
     )
 
     def __str__(self):

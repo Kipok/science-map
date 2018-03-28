@@ -30,7 +30,7 @@
             <td class="elem-header">Methods</td>
             <td class="elem-text">
                 {% for method in methods %}
-                    <a href="{% url "paper:method" method.id %}">{{ method.short_title }}</a>{%if not forloop.last%},{%endif%}
+                    <a href="{% url "elements:method" method.id %}">{{ method.short_title }}</a>{%if not forloop.last%},{%endif%}
                 {% endfor %}
             </td>
         </tr>
