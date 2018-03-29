@@ -1,8 +1,16 @@
 from django.contrib import admin
-from .models import Paper, Method, Author, Conference, Result
+from .models import Paper, Method, Author, Conference, Result, Dataset, Metric
 
 
 class AuthorAdmin(admin.ModelAdmin):
+  pass
+
+
+class DatasetAdmin(admin.ModelAdmin):
+  pass
+
+
+class MetricAdmin(admin.ModelAdmin):
   pass
 
 
@@ -30,3 +38,5 @@ class ConferenceAdmin(admin.ModelAdmin):
 admin.site.register(Paper, PaperAdmin)
 admin.site.register(Author, AuthorAdmin)
 admin.site.register(Conference, ConferenceAdmin)
+admin.site.register(Dataset, DatasetAdmin)
+admin.site.register(Metric, MetricAdmin)

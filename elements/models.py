@@ -1,18 +1,11 @@
 from django.db import models
 
 
-class Dataset(models.Model):
-  name = models.CharField(max_length=100)
-  description = models.TextField(max_length=2000)
-
-  def __str__(self):
-    return self.name
-
-
 class Metric(models.Model):
   name = models.CharField(max_length=100)
   description = models.TextField(max_length=2000)
   # TODO: add automatically checked range?
+  # TODO: add some field for useful link(s). Also might be useful in other places
 
   def __str__(self):
     return self.name
@@ -59,6 +52,15 @@ class Paper(models.Model):
     return self.title
 
 
+class Dataset(models.Model):
+  name = models.CharField(max_length=100)
+  description = models.TextField(max_length=2000)
+  original_paper = models.ForeignKey(Paper, on_delete=models.CASCADE)
+
+  def __str__(self):
+    return self.name
+
+
 class Method(models.Model):
   title = models.CharField(max_length=100)
   short_title = models.CharField(max_length=20)
@@ -75,7 +77,9 @@ class Result(models.Model):
   value = models.FloatField()
   dataset = models.ForeignKey(Dataset, on_delete=models.CASCADE)
   metric = models.ForeignKey(Metric, on_delete=models.CASCADE)
+  method = models.ForeignKey(Method, on_delete=models.CASCADE)
   paper = models.ForeignKey(Paper, on_delete=models.CASCADE)
 
   def __str__(self):
-    return "{}/{}/{:.2f}".format(self.dataset.name, self.metric.name, self.value)
+    return "{}/{}/{}/{:.2f}".format(self.dataset.name, self.metric.name,
+                                    self.metric.name, self.value)
