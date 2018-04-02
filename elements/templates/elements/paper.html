@@ -73,6 +73,31 @@
             {% endfor %}
             </td>
         </tr>
+        <tr class="content-row">
+            <td class="elem-header">Extends</td>
+            <td class="elem-text">
+            {% for link in links_to_current %}
+                <div class="link">
+                    <a href="{% url "elements:paper" link.src_paper.id %}">
+                        {{ link.src_paper.title }}
+                    </a> as {{ link.type.name }}
+                </div>
+            {% endfor %}
+            </td>
+        </tr>
+        <tr class="content-row">
+            <td class="elem-header">Extended by</td>
+            <td class="elem-text">
+            {% for link in links_from_current %}
+                <div class="link">
+                    <a href="{% url "elements:paper" link.dst_paper.id %}">
+                        {{ link.dst_paper.title }}
+                    </a> as {{ link.type.name }}<br>
+                </div>
+
+            {% endfor %}
+            </td>
+        </tr>
     </table>
     <footer>
         <a href="{{ paper.text_url }}">url</a>,

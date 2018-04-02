@@ -36,13 +36,16 @@ class Paper(models.Model):
   project_url = models.URLField(blank=True)
   date_published = models.DateField(verbose_name="publication date")
 
+  # TODO: consider moving it to another model?
   DATASET_TYPE = 0
   METHOD_TYPE = 1
   THEORY_TYPE = 2
+  REVIEW_TYPE = 3
   TYPE_CHOICES = (
       (DATASET_TYPE, 'Dataset'),
       (METHOD_TYPE, 'Method'),
       (THEORY_TYPE, 'Theory'),
+      (REVIEW_TYPE, 'Review'),
   )
 
   type = models.IntegerField(choices=TYPE_CHOICES)
@@ -86,3 +89,31 @@ class Result(models.Model):
   def __str__(self):
     return "{}/{}/{}/{:.2f}".format(self.dataset.name, self.method.name,
                                     self.metric.name, self.value)
+
+
+class LinkType(models.Model):
+  name = models.CharField(max_length=100)
+  description = models.TextField(max_length=3200)
+
+  def __str__(self):
+    return self.name
+
+
+class Link(models.Model):
+  # TODO: add check that can't link to itself
+  type = models.ForeignKey(LinkType, on_delete=models.CASCADE)
+  src_paper = models.ForeignKey(
+    Paper,
+    on_delete=models.CASCADE,
+    related_name='src_paper'
+  )
+  dst_paper = models.ForeignKey(
+    Paper,
+    on_delete=models.CASCADE,
+    related_name='dst_paper',
+  )
+
+  def __str__(self):
+    return "{}--{}--{}".format(
+      self.src_paper.title, self.type, self.dst_paper.title,
+    )

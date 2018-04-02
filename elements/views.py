@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Paper, Method, Result, Dataset, Metric
+from .models import Paper, Method, Result, Dataset, Metric, Link
 
 
 def paper_view(request, paper_id):
@@ -36,6 +36,8 @@ def paper_view(request, paper_id):
     'paper': paper,
     'methods': Method.objects.filter(paper_id=paper_id),
     'results': results_for_template,
+    'links_to_current': Link.objects.filter(dst_paper_id=paper_id),
+    'links_from_current': Link.objects.filter(src_paper_id=paper_id),
   }
   return render(request, "elements/paper.html", context)
 

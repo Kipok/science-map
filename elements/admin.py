@@ -1,15 +1,19 @@
 from django.contrib import admin
-from .models import Paper, Method, Author, Conference, Result, Dataset, Metric
+from .models import Paper, Method, Author, Conference, \
+                    Result, Dataset, Metric, Link, LinkType
 
 
+@admin.register(Author)
 class AuthorAdmin(admin.ModelAdmin):
   pass
 
 
+@admin.register(Dataset)
 class DatasetAdmin(admin.ModelAdmin):
   pass
 
 
+@admin.register(Metric)
 class MetricAdmin(admin.ModelAdmin):
   pass
 
@@ -24,19 +28,23 @@ class ResultInline(admin.TabularInline):
   extra = 1
 
 
+class LinkInline(admin.TabularInline):
+  model = Link
+  extra = 1
+  fk_name = 'src_paper'
+
+
+@admin.register(Paper)
 class PaperAdmin(admin.ModelAdmin):
-  inlines = [MethodInline, ResultInline]
+  # TODO: make problem field shorter
+  inlines = [MethodInline, ResultInline, LinkInline]
 
 
+@admin.register(Conference)
 class ConferenceAdmin(admin.ModelAdmin):
   pass
 
 
-# TODO: make problem field shorter
-
-
-admin.site.register(Paper, PaperAdmin)
-admin.site.register(Author, AuthorAdmin)
-admin.site.register(Conference, ConferenceAdmin)
-admin.site.register(Dataset, DatasetAdmin)
-admin.site.register(Metric, MetricAdmin)
+@admin.register(LinkType)
+class LinkTypeAdmin(admin.ModelAdmin):
+  pass
