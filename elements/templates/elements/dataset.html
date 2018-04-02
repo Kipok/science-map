@@ -1,0 +1,12 @@
+{% extends "base_element.html" %}
+{% load static %}
+
+{% block css-include %}
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/method.css' %}"/>
+{% endblock %}
+
+{% block content %}
+    <header>{{ dataset.name }}</header>
+    <div id="description">{{ dataset.description }}</div>
+{# TODO: add fancy things like what's state of the art, etc. #}
+{% endblock content %}

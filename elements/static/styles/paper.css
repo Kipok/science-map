@@ -46,3 +46,16 @@
   bottom: 10px;
   right: 0px;
 }
+#element .dataset-results {
+  border-collapse: collapse;
+  float: left;
+  margin-left: 10px;
+  margin-top: 10px;
+}
+#element .dataset-results td {
+  border: 1px solid black;
+  text-align: center;
+  vertical-align: middle;
+  height: 20px;
+  padding: 5px;
+}

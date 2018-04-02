@@ -10,8 +10,8 @@
     <div id="info">
         {% for author in paper.authors.all %}
             {{ author.name }}{%if not forloop.last%},{%endif%}
-        {% endfor %} ({{ paper.conference.short_title }},
-                      {{ paper.date_published }}), 10 cites, 3 links</div>
+        {% endfor %} ({{ paper.conference.short_name }},
+                      {{ paper.date_published }}), x cites, y links</div>
     {# TODO: automatic cites and links determination #}
     <table id="content">
         <tr class="content-row">
@@ -30,24 +30,47 @@
             <td class="elem-header">Methods</td>
             <td class="elem-text">
                 {% for method in methods %}
-                    <a href="{% url "elements:method" method.id %}">{{ method.short_title }}</a>{%if not forloop.last%},{%endif%}
+                    <a href="{% url "elements:method" method.id %}">
+                        {{ method.short_name }}</a>{%if not forloop.last%},{%endif%}
                 {% endfor %}
             </td>
         </tr>
         <tr class="content-row">
             <td class="elem-header">Results</td>
             <td class="elem-text">
-                <a href="#0">QUASAR-T</a> (<a href="#0">precision</a>, <a href="#0">recall</a>).
-                <a href="#1">MF-e</a> (0.20, 0.43),
-                <a href="#2">MF-i</a> (0.50, 0.32),
-                <a href="#3">Richardson et al., 2013/SW</a> (0.93, 0.99),
-                <a href="#4">Richardson et al., 2013/SW+D</a> (0.61, 0.41)
-                <br/><br/> <!-- TODO: make it with margin/padding -->
-                <a href="#0">QUASAR-S</a> (<a href="#0">precision</a>, <a href="#0">recall</a>).
-                <a href="#1">MF-e</a> (0.20, 0.43),
-                <a href="#2">MF-i</a> (0.50, 0.32),
-                <a href="#3">Richardson et al., 2013/SW</a> (0.92, 0.99),
-                <a href="#4">Richardson et al., 2013/SW+D</a> (0.69, 0.41)
+            {% for dataset, results_tuple in results.items %}
+                <table class="dataset-results">
+                    <tr class="dataset-name-row">
+                        <td colspan="3">
+                            <a href="{% url "elements:dataset" dataset.id %}">
+                                {{ dataset.name }}
+                            </a>
+                        </td>
+                    </tr>
+                    <tr class="metrics-row">
+                        <td></td>
+                        {% for metric in results_tuple.0 %}
+                        <td>
+                            <a href="{% url "elements:metric" metric.id %}">
+                                {{ metric.name }}
+                            </a>
+                        </td>
+                        {% endfor %}
+                    </tr>
+                {% for result_row in results_tuple.1 %}
+                    <tr class="result-row">
+                        <td>
+                            <a href="{% url "elements:method" result_row.0.id %}">
+                                {{ result_row.0.short_name }}
+                            </a>
+                        </td>
+                    {% for value in result_row|slice:"1:" %}
+                        <td>{{ value }}</td>
+                    {% endfor %}
+                    </tr>
+                {% endfor %}
+                </table>
+            {% endfor %}
             </td>
         </tr>
     </table>

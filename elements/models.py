@@ -19,11 +19,11 @@ class Author(models.Model):
 
 
 class Conference(models.Model):
-  title = models.CharField(max_length=300)
-  short_title = models.CharField(max_length=30)
+  name = models.CharField(max_length=300)
+  short_name = models.CharField(max_length=30)
 
   def __str__(self):
-    return self.short_title
+    return self.short_name
 
 
 class Paper(models.Model):
@@ -55,22 +55,22 @@ class Paper(models.Model):
 class Dataset(models.Model):
   name = models.CharField(max_length=100)
   description = models.TextField(max_length=2000)
-  original_paper = models.ForeignKey(Paper, on_delete=models.CASCADE)
+  paper = models.ForeignKey(Paper, on_delete=models.CASCADE)
 
   def __str__(self):
     return self.name
 
 
 class Method(models.Model):
-  title = models.CharField(max_length=100)
-  short_title = models.CharField(max_length=20)
+  name = models.CharField(max_length=100)
+  short_name = models.CharField(max_length=20)
   description = models.TextField(max_length=3200)
-  orig_paper = models.ForeignKey(
+  paper = models.ForeignKey(
       Paper, on_delete=models.CASCADE, verbose_name='Original elements',
   )
 
   def __str__(self):
-    return self.short_title
+    return self.short_name
 
 
 class Result(models.Model):
@@ -79,7 +79,10 @@ class Result(models.Model):
   metric = models.ForeignKey(Metric, on_delete=models.CASCADE)
   method = models.ForeignKey(Method, on_delete=models.CASCADE)
   paper = models.ForeignKey(Paper, on_delete=models.CASCADE)
+  # TODO: add check that there are no two results for the same method/dataset
+  # TODO: think about rewriting it in the actual format:
+  #       dataset: list of metrics, list of methods-values
 
   def __str__(self):
-    return "{}/{}/{}/{:.2f}".format(self.dataset.name, self.metric.name,
+    return "{}/{}/{}/{:.2f}".format(self.dataset.name, self.method.name,
                                     self.metric.name, self.value)
