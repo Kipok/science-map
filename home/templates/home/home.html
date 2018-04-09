@@ -8,6 +8,18 @@
     <link rel="stylesheet" type="text/css" href="{% static 'styles/normalize.css' %}" />
 </head>
 <body>
-    Here is a <a href="elements/paper/1">link</a> to the first paper.
+    <div style="margin-left: 30px; margin-top: 30px;">
+        <form action="" method="post">
+            {% csrf_token %}
+            {{ form }}
+            <input type="submit" value="Search" />
+        </form>
+        <br>
+        {% for paper in all_papers %}
+            <div style="margin-bottom: 10px;">
+                <a href="{% url "elements:paper" paper.id %}">{{ paper.title }}</a>
+            </div>
+        {% endfor %}
+    </div>
 </body>
 </html>
