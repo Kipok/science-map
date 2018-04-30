@@ -44,7 +44,7 @@ class Paper(models.Model):
   project_url = models.URLField(blank=True)
   date_published = models.DateField(verbose_name="publication date")
 
-  type = models.ManyToManyField(PaperType)
+  types = models.ManyToManyField(PaperType)
   authors = models.ManyToManyField(Author)
 
   def __str__(self):
@@ -72,12 +72,14 @@ class Method(models.Model):
     return self.short_name
 
 
-class Result(models.Model):
+class ValueResult(models.Model):
   value = models.FloatField()
   dataset = models.ForeignKey(Dataset, on_delete=models.CASCADE)
   metric = models.ForeignKey(Metric, on_delete=models.CASCADE)
   method = models.ForeignKey(Method, on_delete=models.CASCADE)
   paper = models.ForeignKey(Paper, on_delete=models.CASCADE)
+  # TODO: how to display?
+  configuration = models.TextField(max_length=1000, blank=True)
   # TODO: add check that there are no two results for the same method/dataset
   # TODO: think about rewriting it in the actual format:
   #       dataset: list of metrics, list of methods-values
@@ -85,6 +87,16 @@ class Result(models.Model):
   def __str__(self):
     return "{}/{}/{}/{:.2f}".format(self.dataset.name, self.method.name,
                                     self.metric.name, self.value)
+
+
+class TextResult(models.Model):
+  short_description = models.CharField(max_length=100)
+  detailed_description = models.TextField(max_length=3000)
+  visual_description = models.ImageField(upload_to='uploads', blank=True)
+  paper = models.ForeignKey(Paper, on_delete=models.CASCADE)
+
+  def __str__(self):
+    return self.short_description
 
 
 class LinkType(models.Model):

@@ -1,12 +1,12 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Paper, Method, Result, Dataset, \
-                    Metric, Link, LinkType, PaperType
+from .models import Paper, Method, ValueResult, Dataset, \
+                    Metric, Link, LinkType, PaperType, TextResult
 
 
 def paper_view(request, paper_id):
   paper = get_object_or_404(Paper, pk=paper_id)
   # TODO: rewrite as SQL so that it is always fast?
-  results = Result.objects.filter(paper_id=paper_id)
+  results = ValueResult.objects.filter(paper_id=paper_id)
   # datasets - dict of metrics, metric - list of method, value
   # TODO: make a unittest to check this functionality
   datasets_results = {}
@@ -36,7 +36,8 @@ def paper_view(request, paper_id):
   context = {
     'paper': paper,
     'methods': Method.objects.filter(paper_id=paper_id),
-    'results': results_for_template,
+    'value_results': results_for_template,
+    'text_results': TextResult.objects.filter(paper_id=paper_id),
     'links_to_current': Link.objects.filter(dst_paper_id=paper_id),
     'links_from_current': Link.objects.filter(src_paper_id=paper_id),
   }
@@ -47,6 +48,12 @@ def method_view(request, method_id):
   method = get_object_or_404(Method, pk=method_id)
   context = {'method': method}
   return render(request, "elements/method.html", context)
+
+
+def text_result_view(request, text_result_id):
+  text_result = get_object_or_404(TextResult, pk=text_result_id)
+  context = {'result': text_result}
+  return render(request, "elements/text_result.html", context)
 
 
 def dataset_view(request, dataset_id):

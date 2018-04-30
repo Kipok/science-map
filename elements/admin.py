@@ -1,6 +1,7 @@
 from django.contrib import admin
 from .models import Paper, Method, Author, Conference, \
-                    Result, Dataset, Metric, Link, LinkType, PaperType
+                    ValueResult, TextResult, Dataset, Metric,\
+                    Link, LinkType, PaperType
 
 
 @admin.register(Author)
@@ -23,8 +24,13 @@ class MethodInline(admin.TabularInline):
   extra = 1
 
 
-class ResultInline(admin.TabularInline):
-  model = Result
+class ValueResultInline(admin.TabularInline):
+  model = ValueResult
+  extra = 1
+
+
+class TextResultInline(admin.TabularInline):
+  model = TextResult
   extra = 1
 
 
@@ -37,7 +43,7 @@ class LinkInline(admin.TabularInline):
 @admin.register(Paper)
 class PaperAdmin(admin.ModelAdmin):
   # TODO: make problem field shorter
-  inlines = [MethodInline, ResultInline, LinkInline]
+  inlines = [MethodInline, ValueResultInline, TextResultInline, LinkInline]
 
 
 @admin.register(Conference)

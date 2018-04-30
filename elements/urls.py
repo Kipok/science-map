@@ -10,4 +10,6 @@ urlpatterns = [
   path('link_type/<int:link_type_id>/', views.link_type_view, name='link_type'),
   path('paper_type/<int:paper_type_id>/', views.paper_type_view,
        name='paper_type'),
+  path('text_result/<int:text_result_id>/', views.text_result_view,
+       name='text_result'),
 ]

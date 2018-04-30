@@ -21,7 +21,7 @@
         <tr class="content-row">
             <td class="elem-header">Type</td>
             <td class="elem-text">
-                {% for type in paper.type.all %}
+                {% for type in paper.types.all %}
                     <a href="{% url "elements:paper_type" type.id %}">
                         {{ type.name }}</a>{%if not forloop.last%},{% else %}.{%endif%}
                 {% endfor %}
@@ -41,9 +41,9 @@
             </td>
         </tr>
         <tr class="content-row">
-            <td class="elem-header">Results</td>
+            <td class="elem-header">Quantitative results</td>
             <td class="elem-text">
-            {% for dataset, results_tuple in results.items %}
+            {% for dataset, results_tuple in value_results.items %}
                 <table class="dataset-results">
                     <tr class="dataset-name-row">
                         <td colspan="3">
@@ -78,6 +78,16 @@
             {% endfor %}
             </td>
         </tr>
+        <tr class="content-row">
+            <td class="elem-header">Qualitative results</td>
+            <td class="elem-text">
+            {% for result in text_results %}
+                <a href="{% url "elements:text_result" result.id %}">
+                    {{ result.short_description }}</a>{%if not forloop.last%},{%endif%}
+            {% endfor %}
+            </td>
+        </tr>
+
         <tr class="content-row">
             <td class="elem-header">Extends</td>
             <td class="elem-text">

@@ -1,0 +1,16 @@
+{% extends "base_element.html" %}
+{% load static %}
+
+{% block css-include %}
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/method.css' %}"/>
+{% endblock %}
+
+{% block content %}
+    <header>{{ result.short_description }}</header>
+    <div id="description">{{ result.detailed_description }}</div>
+    {% if result.visual_description %}
+    <div id="visual-description">
+        <img src="{{ result.visual_description.url }}"/>
+    </div>
+    {% endif %}
+{% endblock content %}
