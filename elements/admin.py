@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import Paper, Method, Author, Conference, \
-                    Result, Dataset, Metric, Link, LinkType
+                    Result, Dataset, Metric, Link, LinkType, PaperType
 
 
 @admin.register(Author)
@@ -47,4 +47,9 @@ class ConferenceAdmin(admin.ModelAdmin):
 
 @admin.register(LinkType)
 class LinkTypeAdmin(admin.ModelAdmin):
+  pass
+
+
+@admin.register(PaperType)
+class PaperTypeAdmin(admin.ModelAdmin):
   pass

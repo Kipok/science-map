@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Paper, Method, Result, Dataset, Metric, Link
+from .models import Paper, Method, Result, Dataset, \
+                    Metric, Link, LinkType, PaperType
 
 
 def paper_view(request, paper_id):
@@ -58,3 +59,15 @@ def metric_view(request, metric_id):
   metric = get_object_or_404(Metric, pk=metric_id)
   context = {'metric': metric}
   return render(request, "elements/metric.html", context)
+
+
+def link_type_view(request, link_type_id):
+  link_type = get_object_or_404(LinkType, pk=link_type_id)
+  context = {'link_type': link_type}
+  return render(request, "elements/link_type.html", context)
+
+
+def paper_type_view(request, paper_type_id):
+  paper_type = get_object_or_404(PaperType, pk=paper_type_id)
+  context = {'paper_type': paper_type}
+  return render(request, "elements/paper_type.html", context)

@@ -1,0 +1,11 @@
+{% extends "base_element.html" %}
+{% load static %}
+
+{% block css-include %}
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/method.css' %}"/>
+{% endblock %}
+
+{% block content %}
+    <header>{{ paper_type.title }}</header>
+    <div id="description">{{ paper_type.description }}</div>
+{% endblock content %}

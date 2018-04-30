@@ -20,7 +20,12 @@
         </tr>
         <tr class="content-row">
             <td class="elem-header">Type</td>
-            <td class="elem-text">{{ paper.get_type_display }}.</td>
+            <td class="elem-text">
+                {% for type in paper.type.all %}
+                    <a href="{% url "elements:paper_type" type.id %}">
+                        {{ type.name }}</a>{%if not forloop.last%},{% else %}.{%endif%}
+                {% endfor %}
+            </td>
         </tr>
         <tr class="content-row">
             <td class="elem-header">Solution</td>
@@ -80,7 +85,10 @@
                 <div class="link">
                     <a href="{% url "elements:paper" link.src_paper.id %}">
                         {{ link.src_paper.title }}
-                    </a> as {{ link.type.name }}
+                    </a> as
+                    <a href="{% url "elements:link_type" link.type.id %}">
+                        {{ link.type.name }}
+                    </a>
                 </div>
             {% endfor %}
             </td>
@@ -92,7 +100,10 @@
                 <div class="link">
                     <a href="{% url "elements:paper" link.dst_paper.id %}">
                         {{ link.dst_paper.title }}
-                    </a> as {{ link.type.name }}<br>
+                    </a> as
+                    <a href="{% url "elements:link_type" link.type.id %}">
+                        {{ link.type.name }}
+                    </a>
                 </div>
 
             {% endfor %}

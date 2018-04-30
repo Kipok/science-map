@@ -26,6 +26,14 @@ class Conference(models.Model):
     return self.short_name
 
 
+class PaperType(models.Model):
+  name = models.CharField(max_length=100)
+  description = models.TextField(max_length=3200)
+
+  def __str__(self):
+    return self.name
+
+
 class Paper(models.Model):
   title = models.CharField(max_length=200)
   problem = models.TextField(max_length=500)
@@ -36,19 +44,7 @@ class Paper(models.Model):
   project_url = models.URLField(blank=True)
   date_published = models.DateField(verbose_name="publication date")
 
-  # TODO: consider moving it to another model?
-  DATASET_TYPE = 0
-  METHOD_TYPE = 1
-  THEORY_TYPE = 2
-  REVIEW_TYPE = 3
-  TYPE_CHOICES = (
-      (DATASET_TYPE, 'Dataset'),
-      (METHOD_TYPE, 'Method'),
-      (THEORY_TYPE, 'Theory'),
-      (REVIEW_TYPE, 'Review'),
-  )
-
-  type = models.IntegerField(choices=TYPE_CHOICES)
+  type = models.ManyToManyField(PaperType)
   authors = models.ManyToManyField(Author)
 
   def __str__(self):
