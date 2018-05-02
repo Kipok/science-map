@@ -23,10 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '6qgdptwr61y!p06ufhmzi4xchv-c!i5t)h21v^j4w(ku)l7k#j'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['science-map.igitman.com']
 
 # Application definition
 
@@ -77,8 +76,10 @@ WSGI_APPLICATION = 'science_map.wsgi.application'
 
 DATABASES = {
   'default': {
-    'ENGINE': 'django.db.backends.sqlite3',
-    'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    'ENGINE': 'django.db.backends.mysql',
+    'OPTIONS': {'read_default_file': os.path.join(BASE_DIR, 'db.conf')},
+    'HOST': 'localhost',
+    'PORT': '',
   }
 }
 
@@ -123,6 +124,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
   'static',
 ]
+STATIC_ROOT = os.path.join(BASE_DIR, 'build/static')
 
-MEDIA_ROOT = 'media'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'

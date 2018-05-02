@@ -19,7 +19,7 @@ class Author(models.Model):
 
 
 class Conference(models.Model):
-  name = models.CharField(max_length=300)
+  name = models.CharField(max_length=255)
   short_name = models.CharField(max_length=30)
 
   def __str__(self):
