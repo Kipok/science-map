@@ -6,7 +6,12 @@
 {% endblock %}
 
 {% block content %}
-    <header>{{ method.title }}</header>
+    <header>{{ method.name }}</header>
     <div id="description">{{ method.description }}</div>
+    {% if method.visual_description %}
+    <div id="visual-description">
+        <img src="{{ method.visual_description.url }}"/>
+    </div>
+    {% endif %}
 {# TODO: add fancy things like in how many papers used, where performs good, etc. #}
 {% endblock content %}
