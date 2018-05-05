@@ -35,6 +35,7 @@ def paper_view(request, paper_id):
 
   context = {
     'paper': paper,
+    'authors': paper.authors.all().order_by('authorship__order_number'),
     'methods': Method.objects.filter(paper_id=paper_id),
     'value_results': results_for_template,
     'text_results': TextResult.objects.filter(paper_id=paper_id),

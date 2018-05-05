@@ -45,10 +45,16 @@ class Paper(models.Model):
   date_published = models.DateField(verbose_name="publication date")
 
   types = models.ManyToManyField(PaperType)
-  authors = models.ManyToManyField(Author)
+  authors = models.ManyToManyField(Author, through='Authorship')
 
   def __str__(self):
     return self.title
+
+
+class Authorship(models.Model):
+  paper = models.ForeignKey(Paper, on_delete=models.CASCADE)
+  author = models.ForeignKey(Author, on_delete=models.CASCADE)
+  order_number = models.IntegerField()
 
 
 class Dataset(models.Model):

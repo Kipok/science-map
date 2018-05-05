@@ -8,7 +8,7 @@
 {% block content %}
     <header>{{ paper.title }}</header>
     <div id="info">
-        {% for author in paper.authors.all %}
+        {% for author in authors %}
             {{ author.name }}{%if not forloop.last%},{%endif%}
         {% endfor %} ({{ paper.conference.short_name }},
                       {{ paper.date_published }}), x cites, y links</div>
