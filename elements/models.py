@@ -4,6 +4,7 @@ from django.db import models
 class Metric(models.Model):
   name = models.CharField(max_length=100)
   description = models.TextField(max_length=2000)
+  to_complete = models.TextField(max_length=2000, blank=True)
   # TODO: add automatically checked range?
   # TODO: add some field for useful link(s). Also might be useful in other places
 
@@ -46,6 +47,7 @@ class Paper(models.Model):
 
   types = models.ManyToManyField(PaperType)
   authors = models.ManyToManyField(Author, through='Authorship')
+  to_complete = models.TextField(max_length=2000, blank=True)
 
   def __str__(self):
     return self.title
@@ -61,6 +63,7 @@ class Dataset(models.Model):
   name = models.CharField(max_length=100)
   description = models.TextField(max_length=2000)
   paper = models.ForeignKey(Paper, on_delete=models.CASCADE)
+  to_complete = models.TextField(max_length=2000, blank=True)
 
   def __str__(self):
     return self.name
@@ -74,6 +77,7 @@ class Method(models.Model):
       Paper, on_delete=models.CASCADE, verbose_name='Original elements',
   )
   visual_description = models.ImageField(upload_to='uploads', blank=True)
+  to_complete = models.TextField(max_length=2000, blank=True)
 
   def __str__(self):
     return self.short_name
@@ -90,6 +94,7 @@ class ValueResult(models.Model):
   # TODO: add check that there are no two results for the same method/dataset
   # TODO: think about rewriting it in the actual format:
   #       dataset: list of metrics, list of methods-values
+  to_complete = models.TextField(max_length=2000, blank=True)
 
   def __str__(self):
     return "{}/{}/{}/{:.2f}".format(self.dataset.name, self.method.name,
@@ -101,6 +106,7 @@ class TextResult(models.Model):
   detailed_description = models.TextField(max_length=3000)
   visual_description = models.ImageField(upload_to='uploads', blank=True)
   paper = models.ForeignKey(Paper, on_delete=models.CASCADE)
+  to_complete = models.TextField(max_length=2000, blank=True)
 
   def __str__(self):
     return self.short_description
