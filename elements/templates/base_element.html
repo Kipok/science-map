@@ -10,7 +10,8 @@
 </head>
 <body>
     <div id="element">
-    {% block content %}{% endblock %}
+        <div id="back-button" onclick="window.history.go(-1); return false;">←</div>
+        {% block content %}{% endblock %}
     </div>
 </body>
 </html>
