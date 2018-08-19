@@ -5,6 +5,11 @@
     <link rel="stylesheet" type="text/css" href="{% static 'styles/paper.css' %}"/>
 {% endblock %}
 
+{% block js-include %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="{% static 'js/paper.js' %}"></script>
+{% endblock %}
+
 {% block content %}
     <header>{{ paper.title }}</header>
     <div id="info">
@@ -65,12 +70,19 @@
                 {% for result_row in results_tuple.1 %}
                     <tr class="result-row">
                         <td>
-                            <a href="{% url "elements:method" result_row.0.id %}">
+                            <a class="result-name" href="{% url "elements:method" result_row.0.id %}">
                                 {{ result_row.0.short_name }}
                             </a>
+
                         </td>
-                    {% for value in result_row|slice:"1:" %}
-                        <td>{{ value }}</td>
+                    {% for value, configuration in result_row|slice:"1:" %}
+                        <td>
+                            <div id="value-{{ dataset.name }}-{{ forloop.parentloop.counter0 }}-{{ forloop.counter0 }}"
+                                 class="result-value">{{ value }}</div>
+                            <div id="config-{{ dataset.name }}-{{ forloop.parentloop.counter0 }}-{{ forloop.counter0 }}"
+                                 class="result-config">{{ configuration }}</div>
+
+                        </td>
                     {% endfor %}
                     </tr>
                 {% endfor %}
