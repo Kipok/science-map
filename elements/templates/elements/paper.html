@@ -78,11 +78,11 @@
 
                         </td>
                     {% for value, configuration in result_row|slice:"1:" %}
-                        <td>
-                            <div id="value-{{ dataset.name }}-{{ forloop.parentloop.counter0 }}-{{ forloop.counter0 }}"
-                                 class="result-value">{{ value }}</div>
-                            <div id="config-{{ dataset.name }}-{{ forloop.parentloop.counter0 }}-{{ forloop.counter0 }}"
-                                 class="result-config">{{ configuration|internal_links }}</div>
+                        <td class="value-container" id="value-{{ dataset.name }}-{{ forloop.parentloop.counter0 }}-{{ forloop.counter0 }}">
+                            <div class="result-value">{{ value }}</div>
+                            <div id="config-{{ dataset.name }}-{{ forloop.parentloop.counter0 }}-{{ forloop.counter0 }}" class="result-config">
+                                {{ configuration|internal_links }}
+                            </div>
                         </td>
                     {% endfor %}
                     </tr>
