@@ -1,5 +1,6 @@
 {% extends "base_element.html" %}
 {% load static %}
+{% load internal_links %}
 
 {% block css-include %}
     <link rel="stylesheet" type="text/css" href="{% static 'styles/method.css' %}"/>
@@ -7,6 +8,6 @@
 
 {% block content %}
     <header>{{ dataset.name }}</header>
-    <div id="description">{{ dataset.description }}</div>
+    <div id="description">{{ dataset.description|internal_links }}</div>
 {# TODO: add fancy things like what's state of the art, etc. #}
 {% endblock content %}

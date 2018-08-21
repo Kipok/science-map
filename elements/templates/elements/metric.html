@@ -1,5 +1,6 @@
 {% extends "base_element.html" %}
 {% load static %}
+{% load internal_links %}
 
 {% block css-include %}
     <link rel="stylesheet" type="text/css" href="{% static 'styles/method.css' %}"/>
@@ -7,6 +8,6 @@
 
 {% block content %}
     <header>{{ metric.name }}</header>
-    <div id="description">{{ metric.description }}</div>
+    <div id="description">{{ metric.description|internal_links }}</div>
 {# TODO: add link with more info, range, etc? #}
 {% endblock content %}

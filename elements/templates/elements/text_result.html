@@ -1,5 +1,6 @@
 {% extends "base_element.html" %}
 {% load static %}
+{% load internal_links %}
 
 {% block css-include %}
     <link rel="stylesheet" type="text/css" href="{% static 'styles/method.css' %}"/>
@@ -7,7 +8,7 @@
 
 {% block content %}
     <header>{{ result.short_description }}</header>
-    <div id="description">{{ result.detailed_description }}</div>
+    <div id="description">{{ result.detailed_description|internal_links }}</div>
     {% if result.visual_description %}
     <div id="visual-description">
         <img src="{{ result.visual_description.url }}"/>

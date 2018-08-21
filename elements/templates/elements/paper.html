@@ -2,6 +2,7 @@
 {% load static %}
 {% load internal_links %}
 
+
 {% block css-include %}
     <link rel="stylesheet" type="text/css" href="{% static 'styles/paper.css' %}"/>
 {% endblock %}
@@ -22,7 +23,7 @@
     <table id="content">
         <tr class="content-row">
             <td class="elem-header">Problem</td>
-            <td class="elem-text">{{ paper.problem }}</td>
+            <td class="elem-text">{{ paper.problem|internal_links }}</td>
         </tr>
         <tr class="content-row">
             <td class="elem-header">Type</td>
@@ -35,7 +36,7 @@
         </tr>
         <tr class="content-row">
             <td class="elem-header">Solution</td>
-            <td class="elem-text">{{ paper.solution | internal_links}}</td><!-- TODO: justify with carry-over text? -->
+            <td class="elem-text">{{ paper.solution|internal_links }}</td><!-- TODO: justify with carry-over text? -->
         </tr>
         <tr class="content-row">
             <td class="elem-header">Methods</td>
@@ -81,8 +82,7 @@
                             <div id="value-{{ dataset.name }}-{{ forloop.parentloop.counter0 }}-{{ forloop.counter0 }}"
                                  class="result-value">{{ value }}</div>
                             <div id="config-{{ dataset.name }}-{{ forloop.parentloop.counter0 }}-{{ forloop.counter0 }}"
-                                 class="result-config">{{ configuration }}</div>
-
+                                 class="result-config">{{ configuration|internal_links }}</div>
                         </td>
                     {% endfor %}
                     </tr>
