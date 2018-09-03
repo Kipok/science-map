@@ -2,7 +2,7 @@ import os
 import json
 
 
-with open(os.environ.get('SCIENCE_MAP_CONFIG')) as f:
+with open(os.environ.get('DJANGO_CONFIG')) as f:
   config = json.loads(f.read())
 
 SECRET_KEY = config['SECRET_KEY']
@@ -82,7 +82,7 @@ USE_TZ = True
 
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
