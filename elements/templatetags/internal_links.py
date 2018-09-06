@@ -23,11 +23,13 @@ def localurl(match):
 
 @register.filter
 def internal_links(value):
-  """Filter for internal links in the format {{<type>:<id>}}, i.e.{{paper:1}}.
+  """
+  Filter for internal links in the format
+  {{<text>|<type>:<id>}}, i.e.{{ImageNet|paper:1}}.
   """
   value = conditional_escape(value)
   try:
-    pattern = '{{.+\|\S+:\S+}}'
+    pattern = '{{.+?\|\S+?:\S+?}}'
     p = re.compile(pattern)
     return mark_safe(p.sub(localurl, value))
   except NoReverseMatch as e:
