@@ -3,6 +3,6 @@ venv/
 general_files/
 __pycache__/
 /static
-/media
 db.conf
 static_root/
+media/
